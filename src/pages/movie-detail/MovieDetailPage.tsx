@@ -1,0 +1,7 @@
+export function MovieDetailPage() {
+  return (
+    <div className="container py-8">
+      <h1 className="text-2xl font-bold">Movie Details</h1>
+    </div>
+  )
+}
