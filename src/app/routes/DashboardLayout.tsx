@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from '@tanstack/react-router'
 import { Film, Compass, Bookmark } from 'lucide-react'
 import { UserNav } from '@features/auth'
+import { BrandIcon } from '@/assets/BrandIcon'
 
 export function DashboardLayout() {
   const location = useLocation()
@@ -13,9 +14,7 @@ export function DashboardLayout() {
           {/* Brand Logo */}
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-90">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md shadow-primary/20">
-                <Film className="h-5 w-5" />
-              </div>
+              <BrandIcon />
               <div className="flex flex-col">
                 <span className="text-lg font-bold tracking-tight text-foreground leading-none">
                   CineDash
@@ -30,11 +29,10 @@ export function DashboardLayout() {
             <nav className="hidden md:flex items-center gap-1">
               <Link
                 to="/"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === '/'
-                    ? 'bg-primary/10 text-primary font-semibold'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${location.pathname === '/'
+                  ? 'bg-primary/10 text-primary font-semibold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
               >
                 <Compass className="h-4 w-4" />
                 <span>Descoberta</span>
@@ -42,11 +40,10 @@ export function DashboardLayout() {
 
               <Link
                 to="/watchlist"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname.startsWith('/watchlist')
-                    ? 'bg-primary/10 text-primary font-semibold'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                }`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${location.pathname.startsWith('/watchlist')
+                  ? 'bg-primary/10 text-primary font-semibold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
               >
                 <Bookmark className="h-4 w-4" />
                 <span>Minha Watchlist</span>
