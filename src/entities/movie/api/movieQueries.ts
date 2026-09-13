@@ -1,4 +1,4 @@
-import { Movie } from '../model/types'
+import { Movie, MovieDetail } from '../model/types'
 import { env } from '@shared/config'
 
 export interface MovieResponse {
@@ -48,6 +48,13 @@ export const searchMovies = async ({
     `${env.VITE_TMDB_BASE_URL}/search/movie?api_key=${env.VITE_TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${page}`
   )
   if (!res.ok) throw new Error('Falha na busca de filmes')
+  return res.json()
+}
+
+export const fetchMovieDetails = async (id: string): Promise<MovieDetail> => {
+  const API_KEY = 'a81cfa69c84c338d88532dc92602cd94'
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=credits,videos&api_key=${API_KEY}&language=pt-BR`)
+  if (!res.ok) throw new Error('Falha ao carregar detalhes do filme')
   return res.json()
 }
 

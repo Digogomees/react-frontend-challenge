@@ -10,7 +10,7 @@ export function MovieDiscoveryContainer() {
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearch = useDebounce(searchTerm, 500)
     const [page, setPage] = useState(1)
-    const [genreId, setGenreId] = useState<string>('')
+    // const [genreId, setGenreId] = useState<string>('')
     const [year, setYear] = useState<string>('')
     const [minRating, setMinRating] = useState<string>('')
 
@@ -21,8 +21,8 @@ export function MovieDiscoveryContainer() {
         isLoading: isLoadingDiscover,
         error: discoverError,
     } = useQuery({
-        queryKey: ['movies', 'discover', { page, genreId, year, minRating }],
-        queryFn: () => fetchPopularMovies({ page, genreId, year, minRating }),
+        queryKey: ['movies', 'discover', { page, year, minRating }],
+        queryFn: () => fetchPopularMovies({ page, year, minRating }),
         enabled: !isSearching,
         staleTime: 5 * 60 * 1000,
     })
