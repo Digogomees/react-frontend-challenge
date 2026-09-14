@@ -4,6 +4,7 @@ import {
     tableFeatures,
     rowSortingFeature,
     createSortedRowModel,
+    columnVisibilityFeature,
     type ColumnDef,
     type SortingState,
 } from '@tanstack/react-table'
@@ -16,6 +17,7 @@ import { Link } from '@tanstack/react-router'
 
 const features = tableFeatures({
     rowSortingFeature,
+    columnVisibilityFeature,
     sortedRowModel: createSortedRowModel(),
 })
 
