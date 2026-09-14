@@ -84,7 +84,7 @@ export function MovieDiscoveryContainer() {
                         value={searchTerm}
                         onChange={(e) => {
                             setSearchTerm(e.target.value)
-                            setPage(1) // Reseta para a primeira página ao buscar
+                            setPage(1)
                         }}
                         className="pl-10 h-12 text-lg"
                     />

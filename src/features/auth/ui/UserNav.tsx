@@ -2,6 +2,7 @@ import { LogOut, User as UserIcon } from 'lucide-react'
 import { Button, Badge } from '@shared/ui'
 import { useAuth } from '../model/authStore'
 import { useNavigate } from '@tanstack/react-router'
+import { ThemeToggle } from '@/features/theme'
 
 export function UserNav() {
   const { user, logout } = useAuth()
@@ -16,6 +17,7 @@ export function UserNav() {
 
   return (
     <div className="flex items-center gap-3">
+      <ThemeToggle />
       <div className="flex items-center gap-2.5 rounded-full border border-border/70 bg-card/60 px-3 py-1.5 shadow-sm">
         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 text-primary text-xs font-bold">
           {user.avatarUrl ? (
@@ -24,7 +26,6 @@ export function UserNav() {
               alt={user.name}
               className="h-7 w-7 rounded-full object-cover"
               onError={(e) => {
-                // Fallback to icon if avatar URL fails to load
                 e.currentTarget.style.display = 'none'
               }}
             />
