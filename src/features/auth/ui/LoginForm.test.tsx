@@ -47,7 +47,6 @@ describe('LoginForm Component', () => {
     const submitBtn = screen.getByRole('button', { name: /Entrar no Dashboard/i })
 
     await user.type(emailInput, 'curador@cinedash.io')
-    // 6 characters (must fail)
     await user.type(passwordInput, '123456')
     await user.click(submitBtn)
 

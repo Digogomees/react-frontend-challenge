@@ -83,10 +83,6 @@ export function WatchlistTable() {
                     </Button>
                 ),
 
-                /**
-                 * Mantendo seu mapeamento simplificado
-                 * por enquanto.
-                 */
                 cell: () => (
                     <span className="text-muted-foreground">
                         Filme / Aventura

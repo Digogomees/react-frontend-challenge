@@ -21,12 +21,29 @@ export function MovieDetailContainer() {
 
     if (isLoading) {
         return (
-            <div className="container py-8 space-y-4">
-                <Skeleton className="h-8 w-32 rounded" />
-                <Skeleton className="h-[450px] w-full rounded-xl" />
+            <div className="container py-8 space-y-6">
+                <div className="flex flex-col md:flex-row gap-8">
+                    <Skeleton className="w-full md:w-[350px] h-[450px] rounded-xl" />
+                    <div className="flex-1 space-y-4">
+                        <Skeleton className="h-8 w-3/4" />
+                        <Skeleton className="h-5 w-20" />
+                        <Skeleton className="h-5 w-32" />
+                    </div>
+                </div>
+
+                <Skeleton className="h-32 w-full" />
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <Skeleton key={i} className="h-44 w-full rounded-lg" />
+                    ))}
+                </div>
+
+                <Skeleton className="aspect-video w-full max-w-4xl mx-auto rounded-xl" />
             </div>
         )
     }
+
 
     if (error || !movie) {
         return (
@@ -35,13 +52,9 @@ export function MovieDetailContainer() {
             </div>
         )
     }
-
-    // Filtrar o trailer oficial no YouTube se disponível
     const trailer = movie.videos?.results.find(
         (video) => video.site === 'YouTube' && video.type === 'Trailer'
     )
-
-    // Pegar os primeiros 6 atores do elenco
     const cast = movie.credits?.cast.slice(0, 6) || []
 
     return (
@@ -58,13 +71,10 @@ export function MovieDetailContainer() {
                         alt={movie.title}
                         className="w-full rounded-xl shadow-lg object-cover aspect-[2/3]"
                     />
-
-                    {/* Botão para adicionar/remover da watchlist reutilizando a regra existente */}
                     <Button
                         variant={isSaved ? "secondary" : "default"}
                         className="w-full h-12 gap-2 text-base"
                         onClick={() => {
-                            // Exemplo de chamada da regra existente:
                             isSaved ? removeMovie(movie.id) : addMovie(movie)
                         }}
                     >
