@@ -5,19 +5,19 @@ import { Star, Clock, Calendar, ArrowLeft, Bookmark, Play } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { movieDetailRoute } from '@/app/routes'
 import { Button } from '@/shared/ui/button'
+import { useWatchlistStore } from '@/features/watchlist/model/watchlistStore'
 
 export function MovieDetailContainer() {
     const { id } = movieDetailRoute.useParams()
+    const { addMovie, removeMovie, isInWatchlist } = useWatchlistStore()
+    const isSaved = isInWatchlist(id)
 
-    // Query com cache adequado (staleTime de 10 minutos para detalhes que não mudam frequentemente)
     const { data: movie, isLoading, error } = useQuery({
         queryKey: ['movies', 'detail', id],
         queryFn: () => fetchMovieDetails(id),
         enabled: !!id,
         staleTime: 10 * 60 * 1000,
     })
-
-    const isSaved = false // Substituir pelo hook real da sua feature watchlist
 
     if (isLoading) {
         return (
@@ -65,7 +65,7 @@ export function MovieDetailContainer() {
                         className="w-full h-12 gap-2 text-base"
                         onClick={() => {
                             // Exemplo de chamada da regra existente:
-                            // isSaved ? removeItem(movie.id) : addItem(movie)
+                            isSaved ? removeMovie(movie.id) : addMovie(movie)
                         }}
                     >
                         <Bookmark className={`h-5 w-5 ${isSaved ? 'fill-current' : ''}`} />
