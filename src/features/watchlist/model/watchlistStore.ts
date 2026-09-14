@@ -25,7 +25,7 @@ export const useWatchlistStore = create<WatchlistState>()(
                 }))
             },
             isInWatchlist: (id) => {
-                return get().movies.some((movie) => movie.id === id)
+                return get().movies.some((movie) => movie.id === Number(id))
             },
         }),
         {
