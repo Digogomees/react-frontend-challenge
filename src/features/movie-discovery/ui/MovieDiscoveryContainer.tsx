@@ -1,33 +1,33 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Input, Button, Skeleton, Alert } from '@shared/ui'
+import { Input, Button, Skeleton, Alert, Select } from '@shared/ui'
 import { useDebounce } from '@shared/hooks'
 import { Search, Film, Popcorn, AlertCircle } from 'lucide-react'
 import { fetchPopularMovies, searchMovies, MovieCard, Movie } from '@entities/movie'
 
 export function MovieDiscoveryContainer() {
-    // Estados de Busca e Filtros
     const [searchTerm, setSearchTerm] = useState('')
     const debouncedSearch = useDebounce(searchTerm, 500)
     const [page, setPage] = useState(1)
-    // const [genreId, setGenreId] = useState<string>('')
+    const [genreId, setGenreId] = useState<string>('')
     const [year, setYear] = useState<string>('')
     const [minRating, setMinRating] = useState<string>('')
 
     const isSearching = debouncedSearch.trim().length > 2
+
+
 
     const {
         data: discoverData,
         isLoading: isLoadingDiscover,
         error: discoverError,
     } = useQuery({
-        queryKey: ['movies', 'discover', { page, year, minRating }],
-        queryFn: () => fetchPopularMovies({ page, year, minRating }),
+        queryKey: ['movies', 'discover', { page, year, minRating, genreId }],
+        queryFn: () => fetchPopularMovies({ page, year, minRating, genreId }),
         enabled: !isSearching,
         staleTime: 5 * 60 * 1000,
     })
 
-    // 2. Query para Search (com os parâmetros exigidos na Query Key)
     const {
         data: searchData,
         isLoading: isLoadingSearch,
@@ -92,6 +92,32 @@ export function MovieDiscoveryContainer() {
 
                 {/* Filtros simples integrados */}
                 <div className="flex gap-2 flex-wrap">
+                    <Select
+                        value={genreId}
+                        onChange={(e) => { setGenreId(e.target.value); setPage(1); }}
+                        className="w-48 h-12"
+                    >
+                        <option value="">Todos os Gêneros</option>
+                        <option value="28">Ação</option>
+                        <option value="12">Aventura</option>
+                        <option value="16">Animação</option>
+                        <option value="35">Comédia</option>
+                        <option value="80">Crime</option>
+                        <option value="99">Documentário</option>
+                        <option value="18">Drama</option>
+                        <option value="10751">Família</option>
+                        <option value="14">Fantasia</option>
+                        <option value="36">História</option>
+                        <option value="27">Terror</option>
+                        <option value="10402">Música</option>
+                        <option value="9648">Mistério</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Ficção Científica</option>
+                        <option value="10770">Cinema TV</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">Guerra</option>
+                        <option value="37">Faroeste</option>
+                    </Select>
                     <Input
                         type="text"
                         placeholder="Ano (ex: 2023)"
