@@ -18,10 +18,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@app": ["./src/app/index.ts"],
       "@app/*": ["./src/app/*"],
+      "@pages": ["./src/pages/index.ts"],
       "@pages/*": ["./src/pages/*"],
+      "@features": ["./src/features/index.ts"],
       "@features/*": ["./src/features/*"],
+      "@entities": ["./src/entities/index.ts"],
       "@entities/*": ["./src/entities/*"],
+      "@shared": ["./src/shared/index.ts"],
       "@shared/*": ["./src/shared/*"],
       "@styles/*": ["./src/styles/*"]
     },

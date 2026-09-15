@@ -15,7 +15,7 @@ if (!parsedEnv.success) {
 export const env = parsedEnv.success
   ? parsedEnv.data
   : {
-      VITE_TMDB_API_KEY: (import.meta.env.VITE_TMDB_API_KEY as string) || '',
-      VITE_TMDB_BASE_URL: 'https://api.themoviedb.org/3',
-      VITE_TMDB_IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
-    }
+    VITE_TMDB_API_KEY: (import.meta.env.VITE_TMDB_API_KEY as string) || '',
+    VITE_TMDB_BASE_URL: 'https://api.themoviedb.org/3',
+    VITE_TMDB_IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
+  }
