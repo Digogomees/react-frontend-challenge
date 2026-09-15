@@ -14,25 +14,28 @@ export const useThemeStore = create<ThemeState>()(
         (set, get) => ({
             theme: 'dark',
             toggleTheme: () => {
-                const newTheme = get().theme === 'light' ? 'dark' : 'light'
-                get().setTheme(newTheme)
+                const newTheme = get().theme === 'light' ? 'dark' : 'light';
+                get().setTheme(newTheme);
             },
             setTheme: (theme) => {
-                const root = document.documentElement
-                root.classList.remove('light', 'dark')
-                root.classList.add(theme)
-                set({ theme })
+                const root = document.documentElement;
+                root.classList.remove('light', 'dark');
+                root.classList.add(theme);
+                set({ theme });
             },
         }),
         {
             name: 'cinedash-theme',
+            // Quando a store é reidradata (ou não há nada salvo ainda),
+            // garantimos que a classe correta exista.
             onRehydrateStorage: () => (state) => {
-                if (state) {
-                    const root = document.documentElement
-                    root.classList.remove('light', 'dark')
-                    root.classList.add(state.theme)
-                }
+                const root = document.documentElement;
+                root.classList.remove('light', 'dark');
+
+                // Se houver um estado salvo, usa‑o; caso contrário, aplica o valor padrão.
+                const themeToApply = state?.theme ?? 'dark';
+                root.classList.add(themeToApply);
             },
-        }
-    )
-)
+        },
+    ),
+);

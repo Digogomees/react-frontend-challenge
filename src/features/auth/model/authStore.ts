@@ -10,16 +10,11 @@ export interface AuthState {
   isLoading: boolean
   error: string | null
 
-  // Actions
   login: (credentials: LoginFormData) => Promise<boolean>
   logout: () => void
   clearError: () => void
 }
 
-/**
- * Generates a structured fake JWT token for simulated authentication.
- * Clarification: This is purely client-side and must never be treated as a secure credential.
- */
 function generateMockToken(email: string): string {
   const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
   const payload = btoa(
@@ -109,10 +104,6 @@ export const useAuthStore = create<AuthState>()(
   )
 )
 
-/**
- * Custom hook to consume auth state and actions cleanly.
- * Isolates visual components from direct storage details.
- */
 export function useAuth() {
   const user = useAuthStore((state) => state.user)
   const token = useAuthStore((state) => state.token)
