@@ -3,12 +3,15 @@ import { Card } from '@shared/ui'
 import { Star } from 'lucide-react'
 import { Movie } from '../model/types'
 import { getPosterUrl } from '../api/movieQueries'
+import { genreMap } from '../model/genres'
 
 interface MovieCardProps {
   movie: Movie
 }
 
 export function MovieCard({ movie }: MovieCardProps) {
+  const firstGenre = movie.genre_ids[0]
+  const remainingGenres = movie.genre_ids.length - 1
   return (
     <Link to="/movie/$id" params={{ id: String(movie.id) }} className="block">
       <Card className="group overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer h-full">
@@ -34,7 +37,8 @@ export function MovieCard({ movie }: MovieCardProps) {
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>{new Date(movie.release_date).getFullYear()}</span>
             <span className="px-2 py-1 bg-muted rounded text-xs">
-              {movie.genre_ids.length > 0 ? 'Aventura' : 'Outros'}
+              {genreMap[firstGenre] ?? 'Outros'}
+              {remainingGenres > 0 && ` +${remainingGenres}`}
             </span>
           </div>
         </div>
