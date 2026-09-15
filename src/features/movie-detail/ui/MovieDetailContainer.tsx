@@ -75,7 +75,10 @@ export function MovieDetailContainer() {
                         variant={isSaved ? "secondary" : "default"}
                         className="w-full h-12 gap-2 text-base"
                         onClick={() => {
-                            isSaved ? removeMovie(movie.id) : addMovie(movie)
+                            isSaved ? removeMovie(movie.id) : addMovie({
+                                ...movie,
+                                genre_ids: movie.genres.map((genre) => genre.id),
+                            })
                         }}
                     >
                         <Bookmark className={`h-5 w-5 ${isSaved ? 'fill-current' : ''}`} />
